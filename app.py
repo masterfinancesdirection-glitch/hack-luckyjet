@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify, request
 import random
+import time
 from datetime import datetime, timezone
 
 app = Flask(__name__)
@@ -10,7 +11,17 @@ def home():
 
 @app.route('/api/predict', methods=['POST'])
 def predict():
-    # Simulation d'algorithme (70% de cotes intermédiaires, 30% de grosses cotes)
+    # 1. On récupère le timestamp Unix actuel (en secondes)
+    current_timestamp = int(time.time())
+    
+    # 2. On crée une fenêtre unique de 20 secondes.
+    # Tous les serveurs/appareils diviseront par 20 et obtiendront la même clé unique.
+    time_window = current_timestamp // 20
+    
+    # 3. On utilise cette clé comme GRAINE (Seed) pour le générateur
+    random.seed(time_window)
+    
+    # 4. L'algorithme génère maintenant une cote identique pour cette tranche de 20s
     rand = random.random()
     if rand < 0.70:
         predicted_odds = round(random.uniform(1.85, 6.50), 2)
@@ -19,7 +30,7 @@ def predict():
         
     confidence = random.randint(89, 99)
     
-    # Heure exacte GMT+0 (Parfait pour Abidjan, Côte d'Ivoire)
+    # Heure de la génération (GMT+0 pour Abidjan)
     current_time_ci = datetime.now(timezone.utc).strftime("%H:%M:%S")
     
     return jsonify({
