@@ -15,23 +15,14 @@
             overflow-x: hidden;
         }
         
-        /* Design Hacking Avancé */
         .hacker-terminal { 
             border: 2px solid var(--matrix-green); 
             box-shadow: 0 0 40px rgba(0, 255, 65, 0.3), inset 0 0 20px rgba(0, 255, 65, 0.1);
             background: rgba(0, 0, 0, 0.98); 
         }
-        .text-neon { 
-            text-shadow: 0 0 10px var(--matrix-green), 0 0 20px rgba(0, 255, 65, 0.8); 
-        }
-        .text-neon-cyan {
-            text-shadow: 0 0 10px #00ffff, 0 0 20px rgba(0, 255, 255, 0.8);
-        }
-        .promo-gradient { 
-            background: linear-gradient(90deg, #00ff41, #00ffff, #ff00ff); 
-            -webkit-background-clip: text; 
-            color: transparent; 
-        }
+        .text-neon { text-shadow: 0 0 10px var(--matrix-green), 0 0 20px rgba(0, 255, 65, 0.8); }
+        .text-neon-cyan { text-shadow: 0 0 10px #00ffff, 0 0 20px rgba(0, 255, 255, 0.8); }
+        .promo-gradient { background: linear-gradient(90deg, #00ff41, #00ffff, #ff00ff); -webkit-background-clip: text; color: transparent; }
         
         .btn-hacker { 
             border: 2px solid var(--matrix-green); 
@@ -45,7 +36,6 @@
             background: var(--matrix-green); 
             color: #000; 
             box-shadow: 0 0 30px var(--matrix-green);
-            transform: scale(1.01);
         }
         .btn-hacker:disabled { opacity: 0.15; cursor: wait; border-color: rgba(0,255,65,0.2); }
         
@@ -57,31 +47,23 @@
             font-weight: 700; 
             outline: none; 
         }
-        .input-hacker:focus { 
-            border-color: var(--matrix-green); 
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.5); 
-        }
+        .input-hacker:focus { border-color: var(--matrix-green); box-shadow: 0 0 15px rgba(0, 255, 65, 0.5); }
         
-        /* Grille de fond style Matrix Cyber */
         .cyber-grid {
             position: fixed; inset: 0;
-            background-image: linear-gradient(rgba(0, 255, 65, 0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(0, 255, 65, 0.02) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(0, 255, 65, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 65, 0.02) 1px, transparent 1px);
             background-size: 20px 20px;
             pointer-events: none; z-index: 1;
         }
-        
         .scanline { 
             position: fixed; inset: 0; 
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
             background-size: 100% 4px, 6px 100%;
             pointer-events: none; z-index: 999; 
         }
         
         #ad-layer { position: fixed; inset: 0; background: #000; z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 20px; }
         .hidden-state { display: none !important; }
-        
-        /* Animation clignotante d'alerte */
         .glitch-border { animation: blink 2s infinite alternate; }
         @keyframes blink { 0% { border-color: rgba(0, 255, 65, 0.4); } 100% { border-color: rgba(0, 255, 65, 1); } }
     </style>
@@ -94,8 +76,8 @@
         <div class="w-full max-w-lg hacker-terminal p-6 rounded border-2 text-center space-y-6 glitch-border">
             <div class="text-[10px] tracking-widest text-red-500 font-bold animate-pulse">[!] WARNING: UNCRYPTED CONNECTION DETECTED</div>
             
-            <div class="w-full bg-black border-2 border-[#00ff4133] rounded p-2 flex items-center justify-center min-h-[200px] max-h-[260px]">
-                <img src="{{ url_for('static', filename='golds.png') }}" alt="Golds Banner" class="w-full h-auto max-h-full object-contain block mx-auto">
+            <div class="w-full bg-black border-2 border-[#00ff4133] rounded p-2 flex items-center justify-center min-h-[180px] max-h-[240px]">
+                <img src="{{ url_for('static', filename='golds.png') }}" alt="Golds Banner" class="max-w-full h-auto max-h-full object-contain block mx-auto">
             </div>
 
             <div class="p-4 border-2 border-dashed border-[#00ff4177] bg-[#00ff410d] rounded">
@@ -113,24 +95,24 @@
             <span>SYS_TIME_SYNC: <span id="live-clock" class="text-white">--:--:--</span></span>
         </div>
 
-        <div class="p-6 space-y-6">
+        <div class="p-4 sm:p-6 space-y-6">
             <div class="text-center border-b-2 border-dashed border-[#00ff4133] pb-5">
-                <h1 class="text-3xl md:text-4xl font-black tracking-tight text-white text-neon uppercase">
+                <h1 class="text-2xl sm:text-4xl font-black tracking-tight text-white text-neon uppercase">
                     HACK LUCKY JET ALGORITHME
                 </h1>
-                <div class="text-[10px] opacity-70 mt-1 tracking-[0.4em] text-[#00ff41]">PACKET INJECTOR & MATHEMATICAL EXPLOIT</div>
+                <div class="text-[9px] opacity-70 mt-1 tracking-[0.25em] text-[#00ff41]">PACKET INJECTOR & MATHEMATICAL EXPLOIT</div>
             </div>
 
             <div id="setup-zone" class="space-y-4">
                 <p class="text-center text-[11px] uppercase tracking-widest text-zinc-300">
-                    Saisissez les 5 derniers multiplicateurs réels pour injecter la racine :
+                    Saisissez les 5 derniers multiplicateurs réels :
                 </p>
-                <div class="grid grid-cols-5 gap-2">
-                    <input type="number" step="0.01" min="1" class="input-hacker p-2.5 text-sm rounded last-odds" placeholder="1.00">
-                    <input type="number" step="0.01" min="1" class="input-hacker p-2.5 text-sm rounded last-odds" placeholder="1.00">
-                    <input type="number" step="0.01" min="1" class="input-hacker p-2.5 text-sm rounded last-odds" placeholder="1.00">
-                    <input type="number" step="0.01" min="1" class="input-hacker p-2.5 text-sm rounded last-odds" placeholder="1.00">
-                    <input type="number" step="0.01" min="1" class="input-hacker p-2.5 text-sm rounded last-odds" placeholder="1.00">
+                <div class="grid grid-cols-5 gap-1 sm:gap-2">
+                    <input type="number" step="0.01" min="1" class="input-hacker p-2 text-sm rounded last-odds" placeholder="1.00">
+                    <input type="number" step="0.01" min="1" class="input-hacker p-2 text-sm rounded last-odds" placeholder="1.00">
+                    <input type="number" step="0.01" min="1" class="input-hacker p-2 text-sm rounded last-odds" placeholder="1.00">
+                    <input type="number" step="0.01" min="1" class="input-hacker p-2 text-sm rounded last-odds" placeholder="1.00">
+                    <input type="number" step="0.01" min="1" class="input-hacker p-2 text-sm rounded last-odds" placeholder="1.00">
                 </div>
                 <button onclick="breachSystem()" class="w-full py-4 btn-hacker text-sm text-white">
                     INJECTER LES COMPOSANTS DE BASE
@@ -139,21 +121,20 @@
 
             <div id="live-zone" class="hidden-state space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="md:col-span-2 border-2 border-[#00ff4166] p-5 bg-black/80 text-center rounded relative overflow-hidden">
+                    <div class="md:col-span-2 border-2 border-[#00ff4166] p-5 bg-black/80 text-center rounded">
                         <span class="text-[9px] text-[#00ff41] tracking-widest block opacity-60 uppercase mb-1">[ SIGNAL EXTRAIT ]</span>
-                        
-                        <div id="odds-display" class="text-6xl font-black tracking-tight text-white text-neon mb-2">--x</div>
-                        <div class="text-xs font-bold text-cyan-400 font-mono tracking-widest border-t border-[#00ff4122] pt-1 inline-block">
+                        <div id="odds-display" class="text-5xl sm:text-6xl font-black tracking-tight text-white text-neon mb-2">--x</div>
+                        <div class="text-[11px] font-bold text-cyan-400 font-mono tracking-widest border-t border-[#00ff4122] pt-1 inline-block">
                             HEURE DU SIGNAL : <span id="prediction-time" class="text-white text-neon-cyan">--:--:--</span>
                         </div>
                     </div>
-                    <div class="space-y-2">
-                        <div class="border-2 border-[#00ff4133] p-2 text-center bg-black/60 rounded">
-                            <span class="block text-[8px] text-zinc-400 uppercase tracking-widest">CONFIANC</span>
+                    <div class="grid grid-cols-2 md:grid-cols-1 gap-2">
+                        <div class="border-2 border-[#00ff4133] p-2 text-center bg-black/60 rounded flex flex-col justify-center">
+                            <span class="block text-[8px] text-zinc-400 uppercase tracking-widest">CONFIANCE</span>
                             <span id="confidence-display" class="font-bold text-md text-white">--%</span>
                         </div>
-                        <div class="border-2 border-[#00ff4133] p-2 text-center bg-black/60 rounded">
-                            <span class="block text-[8px] text-zinc-400 uppercase tracking-widest">PROTOC</span>
+                        <div class="border-2 border-[#00ff4133] p-2 text-center bg-black/60 rounded flex flex-col justify-center">
+                            <span class="block text-[8px] text-zinc-400 uppercase tracking-widest">PROTOC.</span>
                             <span id="status-label" class="text-amber-500 text-[10px] font-bold tracking-widest animate-pulse">STANDBY</span>
                         </div>
                     </div>
@@ -170,8 +151,7 @@
 
             <div class="border-2 border-[#00ff4144] p-4 bg-black/40 rounded">
                 <span class="text-[10px] text-zinc-400 font-bold block uppercase tracking-widest mb-3">📂 COMPILATION DES SIGNAUX CAPTURÉS :</span>
-                <div id="history-area" class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    </div>
+                <div id="history-area" class="grid grid-cols-2 sm:grid-cols-3 gap-2"></div>
             </div>
         </div>
     </div>
@@ -180,7 +160,6 @@
         let cooldownActive = false;
         let coreInputs = [];
 
-        // Compte à rebours du panneau publicitaire
         window.onload = () => {
             let ticker = 10;
             const trigger = document.getElementById('ad-trigger');
@@ -199,9 +178,9 @@
             }, 1000);
         };
 
-        // Horloge temps réel globale
         setInterval(() => {
-            document.getElementById('live-clock').innerText = new Date().toLocaleTimeString('fr-FR', {timeZone: 'Africa/Abidjan'});
+            // Calé automatiquement sur l'heure locale du smartphone de l'utilisateur
+            document.getElementById('live-clock').innerText = new Date().toLocaleTimeString('fr-FR');
         }, 1000);
 
         function pushLog(text, colorClass = "text-[#00ff41]") {
@@ -213,13 +192,12 @@
             screen.scrollTop = screen.scrollHeight;
         }
 
-        // Étape unique d'ancrage
         function breachSystem() {
             const rawInputs = document.querySelectorAll('.last-odds');
             coreInputs = Array.from(rawInputs).map(el => el.value.trim());
 
             if(coreInputs.some(v => v === "")) {
-                alert("CRITICAL ERROR: Saisie incomplète. Veuillez remplir toutes les variables de sécurité.");
+                alert("CRITICAL ERROR: Saisie incomplète.");
                 return;
             }
 
@@ -230,7 +208,6 @@
             executeHackingLoop();
         }
 
-        // Boucle d'interception principale (20s)
         async function executeHackingLoop() {
             if (cooldownActive) return;
 
@@ -242,8 +219,7 @@
             status.innerText = "DECRYPTING";
             status.className = "text-amber-500 text-[10px] font-bold tracking-widest animate-pulse";
             
-            pushLog("Interception des signatures numériques en cours...");
-            pushLog("Calcul des lois de probabilités scalaires...");
+            pushLog("Interception des signatures numériques...");
 
             try {
                 const req = await fetch('/api/predict', {
@@ -254,16 +230,14 @@
                 const res = await req.json();
 
                 setTimeout(() => {
-                    // Affichage des données de prédiction + heure
                     animatePredictedOdds(res.predicted_odds);
                     document.getElementById('confidence-display').innerText = res.confidence;
                     document.getElementById('prediction-time').innerText = res.timestamp;
                     
                     status.innerText = "SUCCESS";
                     status.className = "text-emerald-400 text-[10px] font-bold tracking-widest animate-pulse";
-                    pushLog(`PAQUET COULÉ : ${res.predicted_odds}x INTERCEPTÉ À ${res.timestamp}`, "text-cyan-400");
+                    pushLog(`PAQUET CAPTURÉ : ${res.predicted_odds}x à ${res.timestamp}`, "text-cyan-400");
                     
-                    // CRÉATION DU BADGE HISTORIQUE ULTRA-VISIBLE (Avec la cote ET l'heure du signal)
                     const historyArea = document.getElementById('history-area');
                     const cell = document.createElement('div');
                     cell.className = "p-2 bg-black border border-[#00ff4144] rounded flex flex-col items-center justify-center text-center";
@@ -277,7 +251,7 @@
                 }, 1200);
 
             } catch (e) {
-                pushLog("CRITICAL NET ERROR: Rupture du flux de données.", "text-red-500 font-bold");
+                pushLog("CRITICAL NET ERROR.", "text-red-500 font-bold");
                 startSystemLockout(5);
             }
         }
@@ -292,7 +266,6 @@
             }, 25);
         }
 
-        // Système de rechargement bloquant (20s)
         function startSystemLockout(time) {
             cooldownActive = true;
             const btn = document.getElementById('action-btn');
@@ -306,7 +279,7 @@
                     cooldownActive = false;
                     btn.disabled = false;
                     btn.innerText = "INTERCEPTER PROCHAIN PAQUET DATA";
-                    pushLog("Nouveau canal disponible. Prêt pour l'extraction.", "text-white/50");
+                    pushLog("Nouveau canal disponible.", "text-white/50");
                 }
             }, 1000);
         }
