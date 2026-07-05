@@ -73,16 +73,21 @@
     <div class="scanline"></div>
 
     <div id="ad-layer">
-        <div class="w-full max-w-lg hacker-terminal p-6 rounded border-2 text-center space-y-6 glitch-border">
+        <div class="w-full max-w-lg hacker-terminal p-6 rounded border-2 text-center space-y-5 glitch-border">
             <div class="text-[10px] tracking-widest text-red-500 font-bold animate-pulse">[!] WARNING: UNCRYPTED CONNECTION DETECTED</div>
             
-            <div class="w-full bg-black border-2 border-[#00ff4133] rounded p-2 flex items-center justify-center min-h-[180px] max-h-[240px]">
+            <div class="w-full bg-black border-2 border-[#00ff4133] rounded p-2 flex items-center justify-center min-h-[160px] max-h-[220px]">
                 <img src="{{ url_for('static', filename='golds.png') }}" alt="Golds Banner" class="max-w-full h-auto max-h-full object-contain block mx-auto">
             </div>
 
-            <div class="p-4 border-2 border-dashed border-[#00ff4177] bg-[#00ff410d] rounded">
+            <div class="p-3 border-2 border-dashed border-[#00ff4177] bg-[#00ff410d] rounded">
                 <span class="text-[10px] text-zinc-400 block tracking-widest mb-1">SYSTEM PROMO OVERRIDE</span>
-                <span class="text-3xl font-black promo-gradient tracking-widest">GODWIN5</span>
+                <span class="text-2xl font-black promo-gradient tracking-widest">GODWIN5</span>
+            </div>
+
+            <div class="space-y-1.5 text-left">
+                <label class="text-[10px] tracking-wider text-zinc-400 uppercase block text-center">Clé de sécurité obligatoire :</label>
+                <input type="text" id="security-key-input" class="w-full p-3 input-hacker rounded text-sm uppercase tracking-widest border-red-500/40" placeholder="ENTREZ LE CODE D'ACCÈS">
             </div>
             
             <button id="ad-trigger" disabled class="w-full py-4 btn-hacker text-sm text-white">BYPASSING SECURITY SYSTEM... (10s)</button>
@@ -159,6 +164,7 @@
     <script>
         let cooldownActive = false;
         let coreInputs = [];
+        let validAccessCode = ""; // Stockage local temporaire après validation graphique
 
         window.onload = () => {
             let ticker = 10;
@@ -171,6 +177,15 @@
                     trigger.disabled = false;
                     trigger.innerText = "S'INJECTER DANS LE NOYAU REEL";
                     trigger.onclick = () => {
+                        const enteredCode = document.getElementById('security-key-input').value.trim().toUpperCase();
+                        
+                        // Validation côté client immédiate avant d'ouvrir la matrice
+                        if (enteredCode !== "SDYAHV2517") {
+                            alert("ACCÈS REFUSÉ : Clé de décryptage invalide.");
+                            return;
+                        }
+
+                        validAccessCode = enteredCode; // Sauvegarde du code pour les requêtes API futures
                         document.getElementById('ad-layer').remove();
                         document.getElementById('app-matrix').classList.remove('hidden-state');
                     }
@@ -224,8 +239,16 @@
                 const req = await fetch('/api/predict', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({odds: coreInputs})
+                    body: JSON.stringify({
+                        odds: coreInputs,
+                        access_code: validAccessCode // Envoi obligatoire de la clé de chiffrement au serveur
+                    })
                 });
+                
+                if (!req.ok) {
+                    throw new Error("Unauthorized access packet intercepted.");
+                }
+                
                 const res = await req.json();
 
                 setTimeout(() => {
@@ -250,7 +273,9 @@
                 }, 1200);
 
             } catch (e) {
-                pushLog("CRITICAL NET ERROR.", "text-red-500 font-bold");
+                pushLog("CRITICAL SECURITY ERROR: ACCESS FORBIDDEN.", "text-red-500 font-bold");
+                status.innerText = "DENIED";
+                status.className = "text-red-500 text-[10px] font-bold tracking-widest";
                 startSystemLockout(5);
             }
         }

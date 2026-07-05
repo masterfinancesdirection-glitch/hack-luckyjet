@@ -5,17 +5,29 @@ from datetime import datetime, timezone
 
 app = Flask(__name__)
 
+# Code d'accès obligatoire
+ACCESS_CODE = "SDYAHV2517"
+
 @app.route('/')
 def home():
     return render_template('index.html')
 
 @app.route('/api/predict', methods=['POST'])
 def predict():
+    data = request.get_json() or {}
+    user_code = data.get('access_code', '')
+
+    # Sécurité : On valide le code d'accès reçu du terminal
+    if user_code != ACCESS_CODE:
+        return jsonify({
+            "status": "error",
+            "message": "ACCESS DENIED: INVALID SECURITY KEY"
+        }), 403
+
     # 1. On récupère le timestamp Unix actuel (en secondes)
     current_timestamp = int(time.time())
     
     # 2. On crée une fenêtre unique de 20 secondes.
-    # Tous les serveurs/appareils diviseront par 20 et obtiendront la même clé unique.
     time_window = current_timestamp // 20
     
     # 3. On utilise cette clé comme GRAINE (Seed) pour le générateur
