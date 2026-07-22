@@ -1,7 +1,7 @@
 from flask import Flask, render_template, jsonify, request
 import random
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 app = Flask(__name__)
 
@@ -42,8 +42,9 @@ def predict():
         
     confidence = random.randint(89, 99)
     
-    # Heure de la génération (GMT+0 pour Abidjan)
-    current_time_ci = datetime.now(timezone.utc).strftime("%H:%M:%S")
+    # Heure de la génération reculée de 30 secondes
+    time_minus_30s = datetime.now(timezone.utc) - timedelta(seconds=30)
+    current_time_ci = time_minus_30s.strftime("%H:%M:%S")
     
     return jsonify({
         "status": "success",
