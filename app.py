@@ -42,9 +42,9 @@ def predict():
         
     confidence = random.randint(89, 99)
     
-    # Heure de la génération reculée de 30 secondes
-    time_minus_30s = datetime.now(timezone.utc) - timedelta(seconds=30)
-    current_time_ci = time_minus_30s.strftime("%H:%M:%S")
+    # Heure de la génération avancée de 45 secondes
+    time_plus_45s = datetime.now(timezone.utc) + timedelta(seconds=45)
+    current_time_ci = time_plus_45s.strftime("%H:%M:%S")
     
     return jsonify({
         "status": "success",
